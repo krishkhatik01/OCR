@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>OCR Order Extractor</title>
+  <meta name="description" content="Fast Grocery and Liquor order extraction in your browser." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app">
+  <header class="app-header">
+    <h1>OCR Order Extractor</h1>
+    <p class="subtitle">Fast Grocery &amp; Liquor order extraction</p>
+  </header>
+
+  <main>
+    <!-- ORDER TYPE: REQUIRED BEFORE UPLOAD -->
+    <section id="orderTypeScreen" class="card type-card">
+      <div class="section-title">Select order type</div>
+      <p class="type-help">Choose the source type first. The selected mode controls the extraction rules.</p>
+      <div class="type-grid">
+        <button type="button" id="selectGroceryBtn" class="type-btn">
+          <span class="type-btn-title">Grocery</span>
+          <span class="type-btn-sub">PDF / labelled order</span>
+        </button>
+        <button type="button" id="selectLiquorBtn" class="type-btn">
+          <span class="type-btn-title">Liquor</span>
+          <span class="type-btn-sub">Driver-app screenshot</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- UPLOAD SCREEN -->
+    <section id="uploadScreen" class="card hidden">
+      <div id="modeIndicator" class="mode-indicator hidden"></div>
+
+      <div id="dropZone" class="drop-zone">
+        <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png,.webp" hidden />
+        <button type="button" id="selectFileBtn" class="btn btn-primary btn-big">+ Select order file</button>
+        <p class="drop-hint">PDF · JPG · PNG · WEBP · drag &amp; drop on desktop</p>
+      </div>
+
+      <div id="fileInfo" class="file-info hidden">
+        <div class="file-info-label">File</div>
+        <div id="fileName" class="file-info-name"></div>
+        <div class="file-info-actions">
+          <button type="button" id="changeFileBtn" class="btn-link">Change file</button>
+          <button type="button" id="changeOrderTypeBtn" class="btn-link">Change order type</button>
+        </div>
+      </div>
+
+      <div id="fileError" class="error-box hidden"></div>
+
+      <button type="button" id="extractBtn" class="btn btn-primary btn-big hidden">Extract order</button>
+    </section>
+
+    <section id="statusBox" class="status-box hidden" aria-live="polite">
+      <div class="spinner" aria-hidden="true"></div>
+      <div id="statusText">Reading order...</div>
+    </section>
+
+    <section id="validationBox" class="validation-box hidden" aria-live="polite"></section>
+
+    <!-- RESULT -->
+    <section id="resultScreen" class="hidden">
+      <div class="result-actions">
+        <button type="button" id="copyAllBtn" class="btn btn-primary btn-big">Copy all</button>
+      </div>
+
+      <div id="resultCard" class="card result-card"></div>
+
+      <div class="card raw-ocr-card">
+        <button type="button" id="toggleRawBtn" class="btn-link" aria-expanded="false">Show raw OCR text</button>
+        <div id="rawOcrBody" class="raw-ocr-body hidden">
+          <pre id="rawOcrText" class="raw-ocr-text"></pre>
+          <button type="button" id="copyRawBtn" class="btn btn-secondary">Copy raw OCR</button>
+        </div>
+      </div>
+
+      <button type="button" id="resetBtn" class="btn btn-secondary btn-big">New order</button>
+    </section>
+
+    <div id="toast" class="toast hidden"></div>
+  </main>
+
+  <footer class="app-footer">
+    <p>Files are processed in your browser. Nothing is uploaded or stored.</p>
+  </footer>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
